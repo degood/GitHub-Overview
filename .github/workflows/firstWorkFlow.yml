@@ -25,9 +25,23 @@ jobs:
  secondjob:
    runs-on: ubuntu-latest
    needs: firstjob
+   env:
+     JOB_VAR: "This job is declared at the job level"
    steps:
-   - name: secondJob script
-     shell: bash
-     run: |
-       echo this is the second job
-       echo and this is a multi-line script
+     - name: second job script
+       shell: bash
+       run: |
+         echo this is the second job
+         echo and this is a multi-line script
+     - name: env var
+       shell: bash
+       run: |
+         echo $WORKFLOW_VAR
+         echo $JOB_VAR
+         echo $STEP_VAR
+         echo "The following is a secret: ${{ secrets.SOME_SECRET }}, of course, I cant tell you because then it wouldnt be a secret..."
+         echo "The following are default environment variables:"
+         echo $GITHUB_ACTOR
+         echo $GITHUB_JOB
+         echo $GITHUB_REF
+    
