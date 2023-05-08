@@ -1,4 +1,7 @@
 name: first workflow
+env:
+  WORKFLOW_VAR: "Declared in WF"
+
 on:
  workflow_dispatch:
 jobs:
@@ -21,6 +24,7 @@ jobs:
       
  secondjob:
    runs-on: ubuntu-latest
+   needs: firstjob
    steps:
    - name: secondJob script
      shell: bash
