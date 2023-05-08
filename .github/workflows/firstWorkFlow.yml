@@ -8,6 +8,15 @@ jobs:
      - name: firstJob script
        shell: bash
        run: echo Hello World! This is the first job
+     - name: checkout
+       uses: actions/checkout@v3
+     - name: greetings
+       uses: actions/hello-world-javascript-action@main
+       with:
+         who-to-greet: 'Mona the Octocat'
+     - name: time
+       run: |
+         echo "The time of the greetings was ${{ steps.greetings.outputs.time }}"
       
  secondjob:
    runs-on: ubuntu-latest
